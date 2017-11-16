@@ -9,3 +9,7 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 end
+
+def fixture_content(type, name)
+  File.read(File.join("spec", "fixtures", type.to_s, name))
+end
