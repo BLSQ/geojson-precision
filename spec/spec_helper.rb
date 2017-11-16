@@ -1,4 +1,12 @@
 require "bundler/setup"
+
+require "simplecov"
+SimpleCov.start "rails" do
+  coverage_dir  "./coverage"
+  add_filter    "/spec/"
+  add_filter    "/test/"
+end
+
 require "geojson/precision"
 
 RSpec.configure do |config|
@@ -8,4 +16,8 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+end
+
+def fixture_content(type, name)
+  File.read(File.join("spec", "fixtures", type.to_s, name))
 end
