@@ -20,7 +20,23 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+trimmed = Geojson::Precision::Parser.new(3).parse({
+    "type"=> "Point",
+    "coordinates"=> [
+        18.984375,
+        57.32652122521709
+    ]
+})
+
+=> trimmed == {
+    "type"=> "Point",
+    "coordinates"=> [
+        18.984,
+        57.327
+    ]
+}
+```
 
 ## Development
 
@@ -30,10 +46,10 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/geojson-precision.
+Bug reports and pull requests are welcome on GitHub at https://github.com/mestachs/geojson-precision.
 
 
 ## License
 
-The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+The gem is available as open source under the terms of the [CC0](LICENSE.txt).
 
