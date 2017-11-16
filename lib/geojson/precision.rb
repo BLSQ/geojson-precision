@@ -68,12 +68,12 @@ module Geojson
       end
 
       def feature_collection(f)
-        f["features"] = f["features"].map { |f| feature(f) }
+        f["features"] = f["features"].map { |fe| feature(fe) }
         f
       end
 
       def geometry_collection(g)
-        g["geometries"] = g["geometries"].map{ |g| geometry(g) }
+        g["geometries"] = g["geometries"].map { |ge| geometry(ge) }
         g
       end
     end
