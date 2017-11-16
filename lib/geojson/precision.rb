@@ -50,20 +50,16 @@ module Geojson
         case obj["type"]
         when "Point"
           obj["coordinates"] = point(obj["coordinates"])
-          obj
         when "LineString", "MultiPoint"
           obj["coordinates"] = multi(obj["coordinates"])
-          return obj
         when "Polygon", "MultiLineString"
           obj["coordinates"] = poly(obj["coordinates"])
-          return obj
         when "MultiPolygon"
           obj["coordinates"] = multi_poly(obj["coordinates"])
-          obj
         when "GeometryCollection"
-          obj["geometries"] = obj.geometries.map(&:geometry)
-          obj
+          obj["geometries"] = obj["geometries"].map { |g| geometry(g) }
         end
+        obj
       end
 
       def feature(obj)
@@ -77,7 +73,7 @@ module Geojson
       end
 
       def geometry_collection(g)
-        g["geometries"] = g["geometries"].map(&:geometry)
+        g["geometries"] = g["geometries"].map{ |g| geometry(g) }
         g
       end
     end
