@@ -8,12 +8,14 @@ RSpec.describe Geojson::Precision do
   let(:parser) { Geojson::Precision::Parser.new(3) }
 
   %w[Point
+     FeaturePoint
      Polygon
      HolyPolygon
      MultiPoint
      MultiPolygon
      MultiLineString
      FeatureCollection
+     FeatureCollectionFull
      GeometryCollection
      FeatureCollectNoGeo
      InvalidObject].each do |feature|
