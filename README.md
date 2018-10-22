@@ -1,5 +1,7 @@
 # Geojson::Precision
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/4ed77cd1bf0278c6d934/maintainability)](https://codeclimate.com/github/BLSQ/geojson-precision/maintainability)
+
 a ruby port of https://github.com/jczaplew/geojson-precision
 
 ## Installation
