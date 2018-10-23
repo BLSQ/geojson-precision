@@ -33,8 +33,10 @@ RSpec.describe Geojson::Precision do
   end
 
   context "With simplification" do
-
-    let(:parser) { Geojson::Precision::Parser.new(precision: 3, simplify: { tolerance: 5, high_quality: false }) }
+    let(:parser) do
+      Geojson::Precision::Parser.new(precision: 3,
+                                     simplify:  { tolerance: 5, high_quality: false })
+    end
 
     it "should simplify Polygon" do
       feature_in = JSON.parse(fixture_content(:simplification, "Polygon.json"))
