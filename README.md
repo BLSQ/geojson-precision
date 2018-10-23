@@ -1,6 +1,6 @@
 # Geojson::Precision
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/4ed77cd1bf0278c6d934/maintainability)](https://codeclimate.com/github/BLSQ/geojson-precision/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/4ed77cd1bf0278c6d934/maintainability)](https://codeclimate.com/github/BLSQ/geojson-precision/maintainability) [![Build Status](https://travis-ci.org/BLSQ/geojson-precision.svg?branch=master)](https://travis-ci.org/BLSQ/geojson-precision)
 
 a ruby port of https://github.com/jczaplew/geojson-precision
 
