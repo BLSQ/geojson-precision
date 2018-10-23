@@ -85,10 +85,14 @@ module Geojson
 
       def simplify(coordinates)
         coord = coordinates[0].map { |c| { x: c[0], y: c[1] } }
-        processed_coord = SimplifyRb::Simplifier.new.process(coord,
-                                                             simplify_options[:tolerance],
-                                                             simplify_options[:high_quality])
+        processed_coord = simplifier.process(coord,
+                                             simplify_options[:tolerance],
+                                             simplify_options[:high_quality])
         [processed_coord.map { |c| [c[:x], c[:y]] }]
+      end
+
+      def simplifier
+        @simplifier ||= SimplifyRb::Simplifier.new
       end
     end
   end
