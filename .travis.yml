@@ -1,13 +1,17 @@
 env:
   global:
-    - GIT_COMMITTED_AT=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then git log -1 --pretty=format:%ct; else git log -1 --skip 1 --pretty=format:%ct; fi)
+  - GIT_COMMITTED_AT=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then git log -1 --pretty=format:%ct;
+    else git log -1 --skip 1 --pretty=format:%ct; fi)
+  - secure: rU/TEVAZZPQTJ94AFuT3+RcktSXzsB+LDz6Kk99K5umc0rorepxo8tcrgHvhhspYlnVmY9gbEWm9VJazVlJ1oUjq/Iq5PZJ4JB3Fiwa56ocFLBpyHTMk5TMIazP4A3G/NqzGT7C1nbMra311VPyH+LgWK6Z4yv3LDOlDBoWJyKbtPF/uMnnbRjHKxT7ONlKWiaISatKZb7uHS1XDQ4S3nyWq7a/OQEl5h0KXzHWDFEys6sRM67gdtQG6bDIxdCnftd4FNmS9bGppJS4TYti14fYcSdnWkLuURAYerpzx2xqwg+P0czUTDFKSUH3aczypsZsJpUTlUZ8upF3qa6+ldy6QQknjoJjNUsfSSimNFGrkSRZbg/swJgsDEHCYDxuEjjo0P4z8YjsJiu3WhtNGY/SD8UySbKdVfDk8+VRoqpTrb3hX34FDE4f/zRbKEQzV9KpeJfkB2U21PpbKplyoOJPRrnUtbzhynhCPvYJzrtAdOIHooCnB9WlEefu4U3Cu3K9fR1W6eQ00BdDrb5CIJPCeJ4M2ynShsER5JLy2LmaX0AvmgiE1TKyw3NWEvxBE7WEdTl3Ls+/UF4CfVEhTAir4rW0g8dNPU5vs5URYGGIEu54el4ECEg0ZK1QjDwDTM3NfvMI4bwOAM4nHw1I0cud2nfkOnNGbSADiW4tntSQ=
 sudo: false
 language: ruby
 cache: bundler
 before_install: gem install bundler -v 1.12.5
 before_script:
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-script: 
-  - "bundle exec rspec"
-  - if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT; fi
+- curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
+  > ./cc-test-reporter
+- chmod +x ./cc-test-reporter
+script:
+- bundle exec rspec
+- if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then ./cc-test-reporter after-build --exit-code
+  $TRAVIS_TEST_RESULT; fi
