@@ -5,6 +5,8 @@ SimpleCov.start "rails" do
   coverage_dir  "./coverage"
   add_filter    "/spec/"
   add_filter    "/test/"
+  add_filter    "/lib/geojson/precision/version"
+
 end
 
 require "geojson/precision"

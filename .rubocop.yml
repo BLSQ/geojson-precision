@@ -29,14 +29,10 @@ AlignHash:
   # a: 0
   # bb: 1
   EnforcedColonStyle: table
-IfUnlessModifier:
-  MaxLineLength: 100
-LineLength:
+Metrics/LineLength:
   Max: 100
 StringLiterals:
   EnforcedStyle: double_quotes
-WhileUntilModifier:
-  MaxLineLength: 100
 MethodCalledOnDoEndBlock:
   Description: 'Avoid chaining a method call on a do...end block.'
   Enabled: true
