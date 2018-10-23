@@ -20,24 +20,33 @@ Or install it yourself as:
 
     $ gem install geojson-precision
 
-## Usage
+## Trimming
+
+Trims the coordinates decimal to the specified number
 
 ```ruby
-trimmed = Geojson::Precision::Parser.new(3).parse({
+Geojson::Precision::Parser.new(precision: 3).parse({
     "type"=> "Point",
     "coordinates"=> [
         18.984375,
         57.32652122521709
     ]
 })
+```
+## Simplifying
 
-=> trimmed == {
-    "type"=> "Point",
+Simplify a given Polygon by reducing the number of points from a tolerance ratio.
+More info on [https://github.com/odlp/simplify_rb](https://github.com/odlp/simplify_rb)
+
+```ruby
+simplified = Geojson::Precision::Parser.new(precision: 3, simplify: { tolerance: 0.01, high_quality: false }).parse({
+    "type"=> "Polygon",
     "coordinates"=> [
-        18.984,
-        57.327
+       [
+          [18.984375, 57.32652122521709]
+       ]
     ]
-}
+})
 ```
 
 ## Development
