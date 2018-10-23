@@ -1,11 +1,14 @@
 require "geojson/precision/version"
+require "simplify_rb"
 require "json"
+ require "byebug"
 
 module Geojson
   module Precision
     class Parser
-      def initialize(precision)
-        @precision = precision
+      def initialize(options = { precision: 6, simplify: {} })
+        @precision = options[:precision]
+        @simplify_options = options[:simplify]
       end
 
       def parse(geojson)
@@ -25,7 +28,7 @@ module Geojson
 
       private
 
-      attr_reader :precision
+      attr_reader :precision, :simplify_options
 
       def point(p)
         p.map do |e|
@@ -37,8 +40,10 @@ module Geojson
         l.map { |l| point(l) }
       end
 
-      def poly(p)
-        p.map { |m| multi(m) }
+      def poly(poly_obj)
+        coords = poly_obj.map { |m| multi(m) }
+        return simplify(coords) if simplify_options
+        coords
       end
 
       def multi_poly(m)
@@ -75,6 +80,12 @@ module Geojson
       def geometry_collection(g)
         g["geometries"] = g["geometries"].map { |ge| geometry(ge) }
         g
+      end
+
+      def simplify(coordinates)
+        coord = coordinates[0].map { |c| { x: c[0], y: c[1] } }
+        processed_coord = SimplifyRb::Simplifier.new.process(coord, simplify_options[:tolerance], simplify_options[:high_quality])
+        [processed_coord.map { |c| [c[:x], c[:y]] }]
       end
     end
   end
