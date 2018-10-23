@@ -29,19 +29,28 @@ RSpec.describe Geojson::Precision do
 
         it "should map #{feature}" do
           specific_fixture_exist = File.exist?(fixture_file(with_option, "#{feature}.json"))
-          feature_in = JSON.parse(fixture_content(specific_fixture_exist ? with_option : :precision, "#{feature}.json"))
+          feature_in = JSON.parse(
+            fixture_content(
+              specific_fixture_exist ? with_option : :precision,
+              "#{feature}.json"
+            )
+          )
           result = parser.parse(feature_in)
+
+          feature_out = load_or_create_expected(with_option, feature, result)
+
+          puts "result #{feature}_expected.json: #{JSON.generate(result)}" if result != feature_out
+
+          expect(result).to eq(feature_out)
+        end
+
+        def load_or_create_expected(with_option, feature, result)
           feature_out_file = fixture_file(with_option, "#{feature}_expected.json")
           unless File.exist?(feature_out_file)
             puts "creating #{feature_out_file}"
             File.open(feature_out_file, "w") { |file| file.write(JSON.pretty_generate(result)) }
           end
-
-          feature_out = JSON.parse(File.read(feature_out_file))
-
-          puts "result #{feature}_expected.json: #{JSON.generate(result)}" if result != feature_out
-
-          expect(result).to eq(feature_out)
+          JSON.parse(File.read(feature_out_file))
         end
       end
     end
