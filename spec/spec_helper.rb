@@ -1,12 +1,13 @@
 require "bundler/setup"
 
-require "simplecov"
-SimpleCov.start "rails" do
-  coverage_dir  "./coverage"
-  add_filter    "/spec/"
-  add_filter    "/test/"
-  add_filter    "/lib/geojson/precision/version"
-
+unless ENV["DISABLE_SIMPLECOV"] == "true"
+  require "simplecov"
+  SimpleCov.start "rails" do
+    coverage_dir  "./coverage"
+    add_filter    "/spec/"
+    add_filter    "/test/"
+    add_filter    "/lib/geojson/precision/version"
+  end
 end
 
 require "geojson/precision"
@@ -20,6 +21,10 @@ RSpec.configure do |config|
   end
 end
 
+def fixture_file(type, name)
+  File.join("spec", "fixtures", type.to_s, name)
+end
+
 def fixture_content(type, name)
-  File.read(File.join("spec", "fixtures", type.to_s, name))
+  File.read(fixture_file(type, name))
 end
